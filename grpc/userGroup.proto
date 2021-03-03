@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package grpc;
+
+service GroupService {
+  rpc CreateGroup(GroupRequest) returns (Result);
+  rpc GetGroup(GroupRequest) returns (Result);
+  rpc DeleteGroup(GroupRequest) returns (Result);
+}
+
+message GroupRequest {
+    string GroupID = 1;
+    string GroupName = 2;
+}
+
+
+message Result {
+    bool status = 1;
+    string GroupID = 2;
+    string GroupName = 3;
+}
