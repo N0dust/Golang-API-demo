@@ -21,7 +21,7 @@ var (
 	db     *gorm.DB
 )
 
-// GetClient is ..
+// connect to grpc service
 func GetClient() {
 	conn, err := grpc.Dial("149.28.91.164:8090", grpc.WithInsecure())
 	if err != nil {
@@ -30,7 +30,7 @@ func GetClient() {
 	client = pb.NewGroupServiceClient(conn)
 }
 
-// ConnectDB is ..
+// connect to Database
 func ConnectDB() {
 	dsn := "root:654321@tcp(149.28.91.164:3306)/test?charset=utf8mb4&parseTime=True&loc=Local"
 	database, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
@@ -43,7 +43,7 @@ func ConnectDB() {
 	fmt.Printf("connet succeed %v", db)
 }
 
-// GetUser is ..
+
 func GetUser(c *gin.Context) {
 	var user models.User
 	id, err := strconv.Atoi(c.Query("id"))
@@ -78,7 +78,7 @@ func GetUser(c *gin.Context) {
 	})
 }
 
-// CreateUser is ..
+
 func CreateUser(context *gin.Context) {
 	var user models.User
 
@@ -103,7 +103,7 @@ func CreateUser(context *gin.Context) {
 
 }
 
-// UpdateUser is ..
+
 func UpdateUser(context *gin.Context) {
 	var user models.User
 
@@ -127,7 +127,7 @@ func UpdateUser(context *gin.Context) {
 
 }
 
-// DeleteUser is ..
+
 func DeleteUser(context *gin.Context) {
 	var user models.User
 	if err := context.ShouldBindJSON(&user); err != nil {
@@ -150,7 +150,7 @@ func DeleteUser(context *gin.Context) {
 
 }
 
-// GetGroup is ..
+
 func GetGroup(c *gin.Context) {
 	//var group models.UserGroup
 	var pbGroup pb.GroupRequest
@@ -175,13 +175,10 @@ func GetGroup(c *gin.Context) {
 	})
 }
 
-// CreateGroup is ..
+
 func CreateGroup(c *gin.Context) {
 	var group models.UserGroup
 	var pbGroup pb.GroupRequest
-
-	// pbGroup.GroupID = c.Query("group_id")
-	// pbGroup.GroupName = c.Query("group_name")
 
 	if err := c.ShouldBindJSON(&group); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -209,12 +206,9 @@ func CreateGroup(c *gin.Context) {
 
 }
 
-// DeleteGroup is ..
+
 func DeleteGroup(c *gin.Context) {
 	var pbGroup pb.GroupRequest
-
-	// pbGroup.GroupID = c.Query("group_id")
-	// pbGroup.GroupName = c.Query("group_name")
 
 	if err := c.ShouldBindJSON(&pbGroup); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
