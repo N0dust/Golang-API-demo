@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// SetupRouter is ...
+
 func SetupRouter() *gin.Engine {
 	r := gin.Default()
 	controller.GetClient()
