@@ -1,6 +1,5 @@
 package models
 
-// UserGroup is...
 type UserGroup struct {
 	GroupID   string `json:"group_id"`
 	GroupName string `json:"group_name"`
